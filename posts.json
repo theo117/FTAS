@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "fintech-bank-partnerships-before-launch",
+    "type": "Featured insight",
+    "category": "Regulatory readiness",
+    "date": "2026-06-01",
+    "title": "What fintech-bank partnerships need before launch",
+    "excerpt": "A practical look at the operating model, control evidence and partner governance questions that should be answered before a financial technology partnership goes live.",
+    "body": [
+      "Before a fintech-bank partnership goes live, both parties need more than a commercial agreement and a technical integration plan. They need a clear view of the operating model, control ownership, evidence routines and regulatory expectations that will apply once the service is live.",
+      "The strongest partnerships define decision rights early. This includes who owns customer-facing obligations, who monitors risk indicators, who manages incidents, and how issues are escalated when performance or compliance concerns arise.",
+      "Launch readiness should also include evidence packs that can withstand internal assurance, partner review and regulatory scrutiny. These packs may include governance minutes, control mappings, service descriptions, risk assessments, due diligence outputs and launch sign-offs.",
+      "FTAS helps teams translate partnership intent into structured operating routines so that the launch is not only commercially viable, but controlled, monitored and easier to defend."
+    ]
+  },
+  {
+    "slug": "evidence-that-stands-up-to-oversight",
+    "type": "Advisory note",
+    "category": "Partner governance",
+    "date": "2026-05-20",
+    "title": "Creating evidence that stands up to oversight",
+    "excerpt": "How structured records, reporting routines and accountability models support safer partner ecosystems.",
+    "body": [
+      "Oversight depends on usable evidence. In fintech and payment partnerships, evidence should show what was decided, who was accountable, what controls were active and how issues were managed over time.",
+      "A practical evidence model should be easy for operational teams to maintain. It should not become a once-off compliance exercise that sits outside the way the business actually works.",
+      "Useful records often include partner onboarding files, due diligence outputs, SLA dashboards, issue logs, risk acceptances, governance minutes and periodic review packs.",
+      "When evidence is structured from the start, teams can respond faster to internal assurance, partner reviews and regulator questions."
+    ]
+  },
+  {
+    "slug": "reducing-friction-between-compliance-and-delivery",
+    "type": "Market view",
+    "category": "Commercial execution",
+    "date": "2026-05-08",
+    "title": "Reducing friction between compliance and delivery",
+    "excerpt": "Ways fintech teams can move quickly while keeping regulatory expectations visible and manageable.",
+    "body": [
+      "Compliance and commercial delivery are often treated as opposing forces. In practice, the best operating models make regulatory expectations visible early enough that teams can make better delivery decisions.",
+      "Friction usually appears when controls are introduced late, ownership is unclear or evidence has to be reconstructed after launch. These issues slow teams down and create avoidable risk.",
+      "A better approach is to design lightweight governance into the delivery rhythm. This includes defined checkpoints, simple control documentation, clear issue ownership and decision records that are easy to maintain.",
+      "The goal is not to make delivery slower. The goal is to make speed more controlled, more explainable and easier to scale."
+    ]
+  },
+  {
+    "slug": "from-project-delivery-to-run-state-assurance",
+    "type": "Operating control",
+    "category": "Assurance",
+    "date": "2026-04-24",
+    "title": "Moving from project delivery to run-state assurance",
+    "excerpt": "Why launch governance should evolve into monitoring, issue tracking and ongoing assurance.",
+    "body": [
+      "Many partnerships are well managed during implementation but lose structure after launch. Once the project team steps back, operational ownership, monitoring and evidence routines need to carry the control environment forward.",
+      "Run-state assurance should include practical monitoring routines, SLA visibility, recurring partner reviews, issue tracking and clear escalation paths.",
+      "The transition from launch to run-state should be planned before go-live. Teams should know what will be monitored, who will review it, how often it will be reviewed and what happens when thresholds are breached.",
+      "This creates a more resilient operating model and helps partnerships remain controlled as volumes, products and obligations grow."
+    ]
+  }
+]

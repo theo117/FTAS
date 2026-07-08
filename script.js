@@ -4,6 +4,157 @@ const revealItems = document.querySelectorAll(".reveal");
 const whatsappNumber = "27718630218";
 const defaultWhatsappMessage =
   "Hi FTAS, I would like to discuss an advisory enquiry.";
+const postsFeedPath = "posts.json";
+const siteUrl = "https://www.financialtechadv.co.za";
+
+const formatPostDate = (value) => {
+  if (!value) {
+    return "";
+  }
+
+  return new Intl.DateTimeFormat("en-ZA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(value));
+};
+
+const getPosts = async () => {
+  const response = await fetch(postsFeedPath, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error("Unable to load posts");
+  }
+
+  const posts = await response.json();
+  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
+const renderInsightsPage = async () => {
+  const postsList = document.querySelector("[data-posts-list]");
+  if (!postsList) {
+    return;
+  }
+
+  try {
+    const posts = await getPosts();
+    const [featuredPost, ...remainingPosts] = posts;
+
+    postsList.replaceChildren();
+
+    const featured = document.createElement("article");
+    featured.className = "featured-post";
+    featured.innerHTML = `
+      <p class="post-meta">${featuredPost.type} / ${featuredPost.category}</p>
+      <h2>${featuredPost.title}</h2>
+      <p>${featuredPost.excerpt}</p>
+      <a href="post.html?slug=${featuredPost.slug}">Read insight</a>
+    `;
+
+    const list = document.createElement("div");
+    list.className = "post-list";
+
+    remainingPosts.forEach((post) => {
+      const article = document.createElement("article");
+      article.innerHTML = `
+        <p class="post-date">${post.type} / ${post.category} / ${formatPostDate(post.date)}</p>
+        <h3><a href="post.html?slug=${post.slug}">${post.title}</a></h3>
+        <p>${post.excerpt}</p>
+      `;
+      list.append(article);
+    });
+
+    postsList.append(featured, list);
+  } catch {
+    postsList.innerHTML = `
+      <article class="featured-post">
+        <p class="post-meta">Insights unavailable</p>
+        <h2>Insights could not be loaded.</h2>
+        <p>Please refresh the page or contact FTAS directly for advisory notes.</p>
+        <a href="contact.html">Contact FTAS</a>
+      </article>
+    `;
+  }
+};
+
+const renderPostPage = async () => {
+  const postPage = document.querySelector("[data-post-page]");
+  if (!postPage) {
+    return;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+  const title = document.querySelector("[data-post-title]");
+  const meta = document.querySelector("[data-post-meta]");
+  const excerpt = document.querySelector("[data-post-excerpt]");
+  const body = document.querySelector("[data-post-body]");
+
+  try {
+    const posts = await getPosts();
+    const post = posts.find((item) => item.slug === slug);
+
+    if (!post) {
+      throw new Error("Post not found");
+    }
+
+    const postUrl = `${siteUrl}/post?slug=${post.slug}`;
+    const postTitle = `${post.title} | FTAS`;
+
+    document.title = postTitle;
+    title.textContent = post.title;
+    meta.textContent = `${post.type} / ${post.category} / ${formatPostDate(post.date)}`;
+    excerpt.textContent = post.excerpt;
+    document.querySelector("[data-dynamic-description]")?.setAttribute("content", post.excerpt);
+    document.querySelector("[data-dynamic-canonical]")?.setAttribute("href", postUrl);
+    document.querySelector("[data-dynamic-og-title]")?.setAttribute("content", postTitle);
+    document.querySelector("[data-dynamic-og-description]")?.setAttribute("content", post.excerpt);
+    document.querySelector("[data-dynamic-og-url]")?.setAttribute("content", postUrl);
+    document.querySelector("[data-dynamic-twitter-title]")?.setAttribute("content", postTitle);
+    document.querySelector("[data-dynamic-twitter-description]")?.setAttribute("content", post.excerpt);
+
+    const articleSchema = document.createElement("script");
+    articleSchema.type = "application/ld+json";
+    articleSchema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      dateModified: post.date,
+      author: {
+        "@type": "Organization",
+        name: "Financial Technology Advisory Services",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Financial Technology Advisory Services",
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/assets/fsa-logo.png`,
+        },
+      },
+      mainEntityOfPage: postUrl,
+      image: `${siteUrl}/assets/fintech-advisory-visual.png`,
+    });
+    document.head.append(articleSchema);
+
+    body.replaceChildren(
+      ...post.body.map((paragraph) => {
+        const element = document.createElement("p");
+        element.textContent = paragraph;
+        return element;
+      }),
+    );
+  } catch {
+    title.textContent = "Insight not found.";
+    meta.textContent = "Insights";
+    excerpt.textContent = "The requested FTAS insight could not be loaded.";
+    body.innerHTML = `
+      <p>The article may have moved or the content feed may be unavailable.</p>
+      <p><a href="insights.html">Return to Insights</a></p>
+    `;
+  }
+};
 
 navToggle?.addEventListener("click", () => {
   const isOpen = siteNav.classList.toggle("is-open");
@@ -46,7 +197,7 @@ const createWhatsappWidget = () => {
     <div class="whatsapp-panel" id="whatsapp-panel" aria-hidden="true">
       <div class="whatsapp-header">
         <div class="whatsapp-avatar" aria-hidden="true">
-          <span>FT</span>
+          <img src="assets/fsa-logo.png" alt="" />
         </div>
         <div>
           <strong>FTAS Advisory</strong>
@@ -127,3 +278,5 @@ const createWhatsappWidget = () => {
 };
 
 createWhatsappWidget();
+renderInsightsPage();
+renderPostPage();
