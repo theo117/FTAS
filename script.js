@@ -247,9 +247,26 @@ navToggle?.addEventListener("click", () => {
 });
 
 siteNav?.addEventListener("click", (event) => {
-  if (event.target instanceof HTMLAnchorElement) {
-    siteNav.classList.remove("is-open");
-    navToggle?.setAttribute("aria-expanded", "false");
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const link = event.target.closest("a[href]");
+  if (!(link instanceof HTMLAnchorElement)) {
+    return;
+  }
+
+  siteNav.classList.remove("is-open");
+  navToggle?.setAttribute("aria-expanded", "false");
+
+  const isCompactNav =
+    navToggle &&
+    window.getComputedStyle(navToggle).display !== "none";
+
+  if (isCompactNav) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.assign(link.href);
   }
 });
 

@@ -117,7 +117,7 @@ p {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 20;
+  z-index: 80;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1401,6 +1401,7 @@ body.page-transitioning .whatsapp-widget {
     margin-top: 10px;
     text-align: center;
     border-bottom: 0;
+    width: 100%;
   }
 }
 
