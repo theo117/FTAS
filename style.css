@@ -1362,6 +1362,8 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .nav-toggle {
+    position: relative;
+    z-index: 2;
     display: block;
   }
 
@@ -1370,6 +1372,7 @@ body.page-transitioning .whatsapp-widget {
     top: 68px;
     right: 18px;
     left: 18px;
+    z-index: 1;
     display: none;
     flex-direction: column;
     align-items: stretch;

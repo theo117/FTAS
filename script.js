@@ -58,6 +58,15 @@ const runSiteTransition = () => {
       return;
     }
 
+    const isCompactNavLink =
+      link.closest(".site-nav") &&
+      navToggle &&
+      window.getComputedStyle(navToggle).display !== "none";
+
+    if (isCompactNavLink) {
+      return;
+    }
+
     const destination = new URL(link.href, window.location.href);
     const isHttpLink = destination.protocol === "http:" || destination.protocol === "https:";
     const isSamePageHash =
