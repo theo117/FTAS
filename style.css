@@ -217,7 +217,51 @@ p {
   background: #f9fcfb;
 }
 
+.trust-section {
+  padding: clamp(54px, 8vw, 96px) 0;
+  border-top: 1px solid rgba(31, 31, 31, 0.08);
+  border-bottom: 1px solid rgba(31, 31, 31, 0.08);
+  background: #fafbfc;
+}
+
+.trust-statement {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.trust-copy {
+  font-size: clamp(1.05rem, 2vw, 1.18rem);
+  color: var(--heading);
+}
+
+.consultation-banner {
+  background: linear-gradient(135deg, rgba(19, 141, 135, 0.94), rgba(58, 63, 68, 0.96)), var(--charcoal);
+  color: #ffffff;
+}
+
+.consultation-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(24px, 4vw, 58px);
+  align-items: center;
+  padding: clamp(38px, 5vw, 56px) 0;
+}
+
+.consultation-inner h3 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+}
+
+.consultation-inner p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+}
+
 .hero {
+
   position: relative;
   min-height: min(760px, calc(100vh - 72px));
   overflow: hidden;
@@ -432,13 +476,16 @@ p {
   color: #ffffff;
   background: transparent;
   border-color: rgba(255, 255, 255, 0.46);
+  transition: background-color 260ms ease, border-color 260ms ease;
 }
 
 .button-secondary:hover,
 .button-secondary:focus-visible {
   background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.68);
   outline: none;
 }
+
 
 .text-link {
   display: inline-flex;
@@ -509,6 +556,7 @@ p {
 .post-list article:hover {
   transform: translateY(-5px);
   box-shadow: 0 26px 64px rgba(31, 31, 31, 0.1);
+  border-color: rgba(31, 167, 161, 0.18);
 }
 
 .service-grid article:hover,
@@ -1677,6 +1725,15 @@ body.page-transitioning .whatsapp-widget {
     width: 100%;
   }
 
+  .consultation-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .consultation-inner .button {
+    width: 100%;
+  }
+
   h1 {
     font-size: clamp(2.18rem, 11vw, 2.9rem);
   }
@@ -1754,6 +1811,31 @@ body.page-transitioning .whatsapp-widget {
 
   .footer-bottom {
     flex-direction: column;
+  }
+
+  .trust-section {
+    padding: clamp(42px, 6vw, 72px) 0;
+  }
+
+  .trust-copy {
+    font-size: 1rem;
+  }
+
+  .consultation-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .consultation-inner h3 {
+    font-size: 1.2rem;
+  }
+
+  .consultation-inner p {
+    font-size: 0.95rem;
+  }
+
+  .consultation-inner .button {
+    width: 100%;
   }
 
   .whatsapp-widget {
