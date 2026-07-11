@@ -251,7 +251,7 @@ p {
 .hero-slide.is-active {
   opacity: 0.34;
   transform: scale(1.1) translateX(-1.6%);
-  animation: hero-image-pan 14s ease-in-out infinite alternate;
+  animation: hero-image-pan 18s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
 }
 
 .hero-slide.is-exiting {
@@ -261,13 +261,19 @@ p {
 
 @keyframes hero-image-pan {
   0% {
-    transform: scale(1.1) translateX(-1.6%) translateY(0);
+    transform: scale(1.1) translateX(-1.6%) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.135) translateX(-0.6%) translateY(-10px) rotate(-0.4deg);
   }
   50% {
-    transform: scale(1.13) translateX(-0.8%) translateY(-10px);
+    transform: scale(1.16) translateX(0.4%) translateY(-18px) rotate(0.2deg);
+  }
+  75% {
+    transform: scale(1.13) translateX(-1.4%) translateY(-8px) rotate(-0.2deg);
   }
   100% {
-    transform: scale(1.1) translateX(-2.2%) translateY(6px);
+    transform: scale(1.1) translateX(-2.2%) translateY(10px) rotate(0deg);
   }
 }
 
@@ -531,15 +537,27 @@ p {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  animation: feature-image-float 12s ease-in-out infinite alternate;
+  animation: feature-image-float 16s ease-in-out infinite alternate;
 }
 
 @keyframes feature-image-float {
   0% {
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.02) translateY(-6px) rotate(-0.2deg);
+  }
+  40% {
+    transform: scale(1.04) translateY(-12px) rotate(0.2deg);
+  }
+  60% {
+    transform: scale(1.03) translateY(-8px) rotate(-0.1deg);
+  }
+  80% {
+    transform: scale(1.02) translateY(-4px) rotate(0.1deg);
   }
   100% {
-    transform: scale(1.03) translateY(-10px);
+    transform: scale(1) translateY(0) rotate(0deg);
   }
 }
 
