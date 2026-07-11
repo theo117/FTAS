@@ -23,6 +23,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding-top: 72px;
@@ -40,6 +46,14 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+p,
+a,
+li,
+span,
+strong {
+  overflow-wrap: anywhere;
 }
 
 h1,
@@ -115,6 +129,7 @@ p {
 }
 
 .brand {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -133,6 +148,7 @@ p {
   display: flex;
   align-items: center;
   gap: 28px;
+  min-width: 0;
 }
 
 .site-nav a {
@@ -294,6 +310,7 @@ p {
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
+  text-align: center;
 }
 
 .button-primary {
@@ -524,6 +541,7 @@ p {
   position: relative;
   padding-left: 28px;
   color: var(--heading);
+  overflow-wrap: normal;
 }
 
 .service-detail li::before {
@@ -795,6 +813,7 @@ label {
 
 input,
 textarea {
+  min-width: 0;
   width: 100%;
   padding: 13px 14px;
   color: var(--ink);
@@ -863,6 +882,7 @@ textarea:focus {
 
 .footer-bottom {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 18px;
   margin-top: 42px;
@@ -1277,6 +1297,26 @@ body.page-transitioning .whatsapp-widget {
 }
 
 @media (max-width: 980px) {
+  :root {
+    --gutter: clamp(18px, 4vw, 42px);
+  }
+
+  h1 {
+    font-size: clamp(2.35rem, 8vw, 4.2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.85rem, 5.2vw, 3rem);
+  }
+
+  .site-header {
+    gap: 18px;
+  }
+
+  .site-nav {
+    gap: clamp(14px, 2.2vw, 22px);
+  }
+
   .intro-grid,
   .image-feature-grid,
   .insight-grid,
@@ -1299,15 +1339,21 @@ body.page-transitioning .whatsapp-widget {
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .featured-post {
+    min-height: 380px;
+  }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 860px) {
   body {
     padding-top: 68px;
   }
 
   .site-header {
     min-height: 68px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .brand img {
@@ -1353,13 +1399,37 @@ body.page-transitioning .whatsapp-widget {
     text-align: center;
     border-bottom: 0;
   }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: clamp(16px, 5vw, 24px);
+  }
+
+  body {
+    font-size: 0.97rem;
+    line-height: 1.62;
+  }
+
+  .brand {
+    gap: 9px;
+    font-size: 0.96rem;
+  }
+
+  .site-nav {
+    right: var(--gutter);
+    left: var(--gutter);
+    max-height: calc(100vh - 88px);
+    overflow-y: auto;
+  }
 
   .hero {
     min-height: auto;
   }
 
   .hero-inner {
-    padding-top: 92px;
+    padding-top: clamp(88px, 18vw, 112px);
+    padding-bottom: clamp(56px, 14vw, 76px);
   }
 
   .hero-actions,
@@ -1368,11 +1438,20 @@ body.page-transitioning .whatsapp-widget {
   }
 
   h1 {
-    font-size: 2.45rem;
+    font-size: clamp(2.18rem, 11vw, 2.9rem);
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: clamp(1.72rem, 8vw, 2.2rem);
+  }
+
+  h3 {
+    font-size: 1.05rem;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
   }
 
   .section {
@@ -1391,13 +1470,40 @@ body.page-transitioning .whatsapp-widget {
     grid-template-columns: 1fr;
   }
 
+  .service-grid article,
+  .principle-grid article,
+  .post-list article,
+  .timeline article {
+    padding: 24px 20px;
+  }
+
+  .service-detail,
+  .contact-card,
+  .legal-summary,
+  .article-aside {
+    padding: 22px 18px;
+  }
+
   .featured-post {
     min-height: 360px;
+  }
+
+  .featured-post a,
+  .article-aside .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .article-content p,
+  .legal-content p,
+  .intro-copy p {
+    font-size: 0.98rem;
   }
 
   .record-table div {
     grid-template-columns: 1fr;
     gap: 6px;
+    padding: 14px;
   }
 
   .footer-bottom {
@@ -1411,10 +1517,53 @@ body.page-transitioning .whatsapp-widget {
 
   .whatsapp-panel {
     width: min(350px, calc(100vw - 28px));
+    max-height: min(620px, calc(100vh - 100px));
+    overflow-y: auto;
   }
 
   .whatsapp-launcher {
     min-height: 54px;
     padding-right: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand span {
+    max-width: 92px;
+  }
+
+  .brand img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .nav-toggle {
+    width: 42px;
+    height: 42px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 10.5vw, 2.45rem);
+  }
+
+  .button {
+    min-height: 50px;
+    padding: 0 16px;
+    font-size: 0.74rem;
+  }
+
+  .contact-form {
+    padding: 20px 16px;
+  }
+
+  .whatsapp-widget {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    justify-items: end;
+  }
+
+  .whatsapp-panel {
+    width: 100%;
   }
 }
