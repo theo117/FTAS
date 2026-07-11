@@ -11,6 +11,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 let compactNavActivationTime = 0;
 let transitionElement;
 let internalNavigationStarted = false;
+let touchLinkStart;
 
 const isCompactNav = () =>
   navToggle &&
@@ -31,6 +32,58 @@ const getNavLinkFromEvent = (event) => {
   return link instanceof HTMLAnchorElement ? link : null;
 };
 
+const getEventPoint = (event) => {
+  if (typeof TouchEvent !== "undefined" && event instanceof TouchEvent) {
+    const touch = event.changedTouches[0] || event.touches[0];
+    return touch ? { x: touch.clientX, y: touch.clientY } : null;
+  }
+
+  if (typeof PointerEvent !== "undefined" && event instanceof PointerEvent) {
+    return { x: event.clientX, y: event.clientY };
+  }
+
+  return null;
+};
+
+const rememberLinkTouchStart = (event) => {
+  if (typeof PointerEvent !== "undefined" && event instanceof PointerEvent && event.pointerType === "mouse") {
+    return;
+  }
+
+  const link = getNavLinkFromEvent(event);
+  const point = getEventPoint(event);
+  touchLinkStart = link && point
+    ? {
+        link,
+        x: point.x,
+        y: point.y,
+        scrollY: window.scrollY,
+        time: Date.now(),
+      }
+    : null;
+};
+
+const isIntentionalTouchActivation = (event, link) => {
+  if (event.type === "click") {
+    return true;
+  }
+
+  if (typeof PointerEvent !== "undefined" && event instanceof PointerEvent && event.pointerType === "mouse") {
+    return true;
+  }
+
+  const point = getEventPoint(event);
+  if (!point || !touchLinkStart || touchLinkStart.link !== link) {
+    return false;
+  }
+
+  const movement = Math.hypot(point.x - touchLinkStart.x, point.y - touchLinkStart.y);
+  const scrollChange = Math.abs(window.scrollY - touchLinkStart.scrollY);
+  const elapsed = Date.now() - touchLinkStart.time;
+
+  return movement < 12 && scrollChange < 8 && elapsed < 900;
+};
+
 const activateCompactNavLink = (event) => {
   if (!isCompactNav()) {
     return false;
@@ -38,6 +91,10 @@ const activateCompactNavLink = (event) => {
 
   const link = getNavLinkFromEvent(event);
   if (!link) {
+    return false;
+  }
+
+  if (!isIntentionalTouchActivation(event, link)) {
     return false;
   }
 
@@ -162,6 +219,10 @@ const handleInternalLinkActivation = (event) => {
     return;
   }
 
+  if (!isIntentionalTouchActivation(event, link)) {
+    return;
+  }
+
   navigateWithTransition(link, event);
 };
 
@@ -181,8 +242,6 @@ const runSiteTransition = () => {
   });
 
   document.addEventListener("click", handleInternalLinkActivation);
-  document.addEventListener("touchend", handleInternalLinkActivation, { capture: true });
-  document.addEventListener("pointerup", handleInternalLinkActivation, { capture: true });
 };
 
 const formatPostDate = (value) => {
@@ -351,6 +410,8 @@ siteNav?.addEventListener("click", (event) => {
   setNavOpen(false);
 });
 
+siteNav?.addEventListener("touchstart", rememberLinkTouchStart, { capture: true, passive: true });
+siteNav?.addEventListener("pointerdown", rememberLinkTouchStart, { capture: true, passive: true });
 siteNav?.addEventListener("touchend", activateCompactNavLink, { capture: true });
 siteNav?.addEventListener("pointerup", activateCompactNavLink, { capture: true });
 
