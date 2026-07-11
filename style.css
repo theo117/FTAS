@@ -553,6 +553,89 @@ p {
   font-weight: 800;
 }
 
+.team-section {
+  background: linear-gradient(180deg, var(--surface), #edf3f3);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.team-card {
+  display: grid;
+  gap: 18px;
+  padding: clamp(26px, 4vw, 38px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teal);
+  border-radius: 4px;
+  box-shadow: 0 14px 36px rgba(31, 31, 31, 0.06);
+}
+
+.team-card-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.team-initials {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  color: #ffffff;
+  font-family: "Montserrat", Calibri, Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  background: var(--teal-dark);
+  border-radius: 50%;
+  box-shadow: 0 12px 28px rgba(19, 141, 135, 0.22);
+}
+
+.team-card h3 {
+  margin-bottom: 6px;
+}
+
+.team-card-header p,
+.team-card > p,
+.team-card li {
+  margin-bottom: 0;
+  color: #6f767b;
+  font-size: 0.94rem;
+}
+
+.team-card-header p {
+  color: var(--teal-dark);
+  font-family: "Montserrat", Calibri, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.team-card ul {
+  display: grid;
+  gap: 8px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-card li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.team-card li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--teal-dark);
+  content: "•";
+  font-weight: 800;
+}
+
 .final-cta {
   text-align: center;
   background: var(--paper);
@@ -1343,6 +1426,7 @@ body.page-transitioning .whatsapp-widget {
   .service-grid,
   .principle-grid,
   .service-detail-grid,
+  .team-grid,
   .timeline,
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1479,6 +1563,7 @@ body.page-transitioning .whatsapp-widget {
   .service-grid,
   .principle-grid,
   .service-detail-grid,
+  .team-grid,
   .timeline,
   .footer-grid {
     grid-template-columns: 1fr;
@@ -1492,10 +1577,15 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .service-detail,
+  .team-card,
   .contact-card,
   .legal-summary,
   .article-aside {
     padding: 22px 18px;
+  }
+
+  .team-card-header {
+    grid-template-columns: 1fr;
   }
 
   .featured-post {
