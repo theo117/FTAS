@@ -6,6 +6,7 @@ const defaultWhatsappMessage =
   "Hi FTAS, I would like to discuss an advisory enquiry.";
 const postsFeedPath = "posts.json";
 const siteUrl = "https://www.fintechadv.co.za";
+const skipIntroStorageKey = "ftasSkipIntro";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let compactNavActivationTime = 0;
 let transitionElement;
@@ -142,6 +143,7 @@ const navigateWithTransition = (link, event) => {
   const transition = createSiteTransition();
   document.body.classList.add("page-transitioning");
   transition.classList.add("is-active", "is-leaving");
+  sessionStorage.setItem(skipIntroStorageKey, "true");
 
   window.setTimeout(() => {
     window.location.assign(destination.href);
@@ -165,7 +167,12 @@ const handleInternalLinkActivation = (event) => {
 
 const runSiteTransition = () => {
   const transition = createSiteTransition();
-  showIntroTransition(transition);
+  const shouldSkipIntro = sessionStorage.getItem(skipIntroStorageKey) === "true";
+  sessionStorage.removeItem(skipIntroStorageKey);
+
+  if (!shouldSkipIntro) {
+    showIntroTransition(transition);
+  }
 
   window.addEventListener("pageshow", (event) => {
     if (event.persisted) {
