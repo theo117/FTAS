@@ -581,16 +581,13 @@ p {
   align-items: center;
 }
 
-.team-initials {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  color: #ffffff;
-  font-family: "Montserrat", Calibri, Arial, sans-serif;
-  font-size: 0.9rem;
-  font-weight: 800;
-  background: var(--teal-dark);
+.team-photo {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  object-position: center top;
+  background: var(--surface);
+  border: 3px solid rgba(31, 167, 161, 0.22);
   border-radius: 50%;
   box-shadow: 0 12px 28px rgba(19, 141, 135, 0.22);
 }
