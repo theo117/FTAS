@@ -1087,6 +1087,136 @@ textarea:focus {
   animation: whatsappPulse 1900ms ease-out infinite;
 }
 
+.site-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  background:
+    linear-gradient(120deg, rgba(31, 31, 31, 0.98), rgba(58, 63, 68, 0.95)),
+    radial-gradient(circle at 50% 46%, rgba(46, 196, 182, 0.28), transparent 34%);
+  transition:
+    opacity 360ms ease,
+    visibility 360ms ease;
+}
+
+.site-transition.is-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.site-transition.is-leaving {
+  transition-duration: 240ms;
+}
+
+.site-transition__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(118px, 18vw, 178px);
+  aspect-ratio: 1;
+}
+
+.site-transition__mark::before,
+.site-transition__mark::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border: 1px solid rgba(46, 196, 182, 0.38);
+  border-radius: 50%;
+  animation: brandOrbit 1400ms ease-out infinite;
+}
+
+.site-transition__mark::after {
+  inset: 15%;
+  border-color: rgba(255, 255, 255, 0.28);
+  animation-delay: 190ms;
+}
+
+.site-transition__mark img {
+  position: relative;
+  z-index: 1;
+  width: 58%;
+  height: 58%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.32));
+  animation: brandFloat 1200ms ease-in-out infinite alternate;
+}
+
+.site-transition__line {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  width: min(220px, 48vw);
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  transform: translateX(-50%);
+}
+
+.site-transition__line::after {
+  display: block;
+  width: 46%;
+  height: 100%;
+  content: "";
+  background: var(--aqua);
+  border-radius: inherit;
+  animation: brandLine 980ms ease-in-out infinite;
+}
+
+body.page-transitioning main,
+body.page-transitioning .site-header,
+body.page-transitioning .site-footer,
+body.page-transitioning .whatsapp-widget {
+  transform: translateY(8px);
+  opacity: 0.82;
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
+}
+
+@keyframes brandFloat {
+  0% {
+    transform: translateY(5px) scale(0.96);
+  }
+
+  100% {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+@keyframes brandOrbit {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes brandLine {
+  0% {
+    transform: translateX(-112%);
+  }
+
+  100% {
+    transform: translateX(245%);
+  }
+}
+
 @keyframes whatsappPulse {
   0% {
     opacity: 0.8;
@@ -1128,6 +1258,20 @@ textarea:focus {
   }
 
   .whatsapp-panel {
+    transition: none;
+  }
+
+  .site-transition {
+    display: none;
+    transition: none;
+  }
+
+  body.page-transitioning main,
+  body.page-transitioning .site-header,
+  body.page-transitioning .site-footer,
+  body.page-transitioning .whatsapp-widget {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 }

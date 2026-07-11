@@ -5,7 +5,83 @@ const whatsappNumber = "27718630218";
 const defaultWhatsappMessage =
   "Hi FTAS, I would like to discuss an advisory enquiry.";
 const postsFeedPath = "posts.json";
-const siteUrl = "https://www.financialtechadv.co.za";
+const siteUrl = "https://www.fintechadv.co.za";
+const transitionStorageKey = "ftasIntroPlayed";
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const createSiteTransition = () => {
+  const transition = document.createElement("div");
+  transition.className = "site-transition";
+  transition.setAttribute("aria-hidden", "true");
+  transition.innerHTML = `
+    <div class="site-transition__mark">
+      <img src="assets/fsa-logo.png" alt="" />
+    </div>
+    <span class="site-transition__line"></span>
+  `;
+  document.body.append(transition);
+  return transition;
+};
+
+const runSiteTransition = () => {
+  const transition = createSiteTransition();
+
+  if (!prefersReducedMotion && !sessionStorage.getItem(transitionStorageKey)) {
+    transition.classList.add("is-active");
+    sessionStorage.setItem(transitionStorageKey, "true");
+
+    window.setTimeout(() => {
+      transition.classList.remove("is-active");
+    }, 1050);
+  }
+
+  window.addEventListener("pageshow", () => {
+    document.body.classList.remove("page-transitioning");
+    transition.classList.remove("is-active", "is-leaving");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element) || prefersReducedMotion || event.defaultPrevented) {
+      return;
+    }
+
+    const link = event.target.closest("a[href]");
+    if (!link) {
+      return;
+    }
+
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    if (link.target || link.hasAttribute("download")) {
+      return;
+    }
+
+    const destination = new URL(link.href, window.location.href);
+    const isHttpLink = destination.protocol === "http:" || destination.protocol === "https:";
+    const isSamePageHash =
+      destination.origin === window.location.origin &&
+      destination.pathname === window.location.pathname &&
+      destination.search === window.location.search &&
+      destination.hash;
+    const isCurrentPage = destination.href === window.location.href;
+
+    if (!isHttpLink || destination.origin !== window.location.origin || isSamePageHash || isCurrentPage) {
+      return;
+    }
+
+    event.preventDefault();
+    siteNav?.classList.remove("is-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+    document.body.classList.add("page-transitioning");
+    transition.classList.add("is-active", "is-leaving");
+
+    window.setTimeout(() => {
+      window.location.href = destination.href;
+    }, 360);
+  });
+};
 
 const formatPostDate = (value) => {
   if (!value) {
@@ -278,5 +354,6 @@ const createWhatsappWidget = () => {
 };
 
 createWhatsappWidget();
+runSiteTransition();
 renderInsightsPage();
 renderPostPage();
