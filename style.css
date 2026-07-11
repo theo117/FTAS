@@ -245,16 +245,30 @@ p {
   transition:
     opacity 900ms ease,
     transform 7000ms ease;
+  will-change: transform, opacity;
 }
 
 .hero-slide.is-active {
   opacity: 0.34;
   transform: scale(1.1) translateX(-1.6%);
+  animation: hero-image-pan 14s ease-in-out infinite alternate;
 }
 
 .hero-slide.is-exiting {
   opacity: 0;
   transform: scale(1.07) translateX(1.4%);
+}
+
+@keyframes hero-image-pan {
+  0% {
+    transform: scale(1.1) translateX(-1.6%) translateY(0);
+  }
+  50% {
+    transform: scale(1.13) translateX(-0.8%) translateY(-10px);
+  }
+  100% {
+    transform: scale(1.1) translateX(-2.2%) translateY(6px);
+  }
 }
 
 .hero-media::after {
@@ -517,6 +531,16 @@ p {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+  animation: feature-image-float 12s ease-in-out infinite alternate;
+}
+
+@keyframes feature-image-float {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(1.03) translateY(-10px);
+  }
 }
 
 .roadmap-section,
