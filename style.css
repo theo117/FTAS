@@ -230,11 +230,31 @@ p {
   inset: 0;
 }
 
-.hero-media img {
+.hero-media img,
+.hero-slide {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.05) translateX(0);
+  transition:
+    opacity 900ms ease,
+    transform 7000ms ease;
+}
+
+.hero-slide.is-active {
   opacity: 0.34;
+  transform: scale(1.1) translateX(-1.6%);
+}
+
+.hero-slide.is-exiting {
+  opacity: 0;
+  transform: scale(1.07) translateX(1.4%);
 }
 
 .hero-media::after {
@@ -244,6 +264,54 @@ p {
   background:
     linear-gradient(105deg, rgba(31, 31, 31, 0.92), rgba(31, 31, 31, 0.72) 48%, rgba(19, 141, 135, 0.28)),
     linear-gradient(0deg, rgba(31, 31, 31, 0.36), rgba(31, 31, 31, 0));
+}
+
+.hero-slider-controls {
+  position: absolute;
+  right: calc(var(--gutter) + 160px);
+  bottom: clamp(24px, 4vw, 44px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-slider-controls button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hero-slider-controls button:hover,
+.hero-slider-controls button:focus-visible {
+  background: rgba(31, 167, 161, 0.54);
+  outline: none;
+}
+
+.hero-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-slider-dots span {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 50%;
+}
+
+.hero-slider-dots span.is-active {
+  background: var(--aqua);
 }
 
 .hero-inner {
@@ -1524,7 +1592,18 @@ body.page-transitioning .whatsapp-widget {
 
   .hero-inner {
     padding-top: clamp(88px, 18vw, 112px);
-    padding-bottom: clamp(56px, 14vw, 76px);
+    padding-bottom: clamp(88px, 20vw, 112px);
+  }
+
+  .hero-slider-controls {
+    right: auto;
+    bottom: 24px;
+    left: var(--gutter);
+  }
+
+  .hero-slider-controls button {
+    width: 38px;
+    height: 38px;
   }
 
   .hero-actions,

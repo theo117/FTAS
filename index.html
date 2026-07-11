@@ -90,8 +90,9 @@
 
     <main>
       <section class="hero hero-home">
-        <div class="hero-media" aria-hidden="true">
-          <img src="assets/fintech-advisory-visual.png" alt="" />
+        <div class="hero-media hero-slider" data-hero-slider aria-hidden="true">
+          <img class="hero-slide is-active" src="assets/fintech-advisory-visual.png" alt="" />
+          <img class="hero-slide" src="assets/advisory-meeting.png" alt="" />
         </div>
         <div class="wrap hero-inner reveal">
           <span class="rule"></span>
@@ -105,6 +106,14 @@
             <a class="button button-primary" href="contact.html">Start a Conversation</a>
             <a class="button button-secondary" href="services.html">View Services</a>
           </div>
+        </div>
+        <div class="hero-slider-controls" aria-label="Hero image controls">
+          <button type="button" data-hero-prev aria-label="Previous hero image">‹</button>
+          <div class="hero-slider-dots" aria-hidden="true">
+            <span class="is-active"></span>
+            <span></span>
+          </div>
+          <button type="button" data-hero-next aria-label="Next hero image">›</button>
         </div>
       </section>
 

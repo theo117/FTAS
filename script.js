@@ -393,6 +393,61 @@ const renderPostPage = async () => {
   }
 };
 
+const createHeroSlider = () => {
+  const slider = document.querySelector("[data-hero-slider]");
+  const slides = [...document.querySelectorAll(".hero-slide")];
+  const dots = [...document.querySelectorAll(".hero-slider-dots span")];
+  const prevButton = document.querySelector("[data-hero-prev]");
+  const nextButton = document.querySelector("[data-hero-next]");
+
+  if (!slider || slides.length < 2) {
+    return;
+  }
+
+  let activeIndex = 0;
+  let timer;
+
+  const setActiveSlide = (nextIndex) => {
+    const previousSlide = slides[activeIndex];
+    activeIndex = (nextIndex + slides.length) % slides.length;
+
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("is-active", index === activeIndex);
+      slide.classList.remove("is-exiting");
+    });
+
+    if (previousSlide && previousSlide !== slides[activeIndex]) {
+      previousSlide.classList.add("is-exiting");
+    }
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === activeIndex);
+    });
+  };
+
+  const queueNextSlide = () => {
+    window.clearInterval(timer);
+
+    if (!prefersReducedMotion) {
+      timer = window.setInterval(() => {
+        setActiveSlide(activeIndex + 1);
+      }, 6200);
+    }
+  };
+
+  prevButton?.addEventListener("click", () => {
+    setActiveSlide(activeIndex - 1);
+    queueNextSlide();
+  });
+
+  nextButton?.addEventListener("click", () => {
+    setActiveSlide(activeIndex + 1);
+    queueNextSlide();
+  });
+
+  queueNextSlide();
+};
+
 navToggle?.addEventListener("click", () => {
   setNavOpen(!siteNav?.classList.contains("is-open"));
 });
@@ -525,6 +580,7 @@ const createWhatsappWidget = () => {
 };
 
 createWhatsappWidget();
+createHeroSlider();
 runSiteTransition();
 renderInsightsPage();
 renderPostPage();
