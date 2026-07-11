@@ -906,6 +906,12 @@ textarea:focus {
   font-family: "Poppins", Calibri, Arial, sans-serif;
 }
 
+body.nav-menu-open .whatsapp-widget {
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
 .whatsapp-panel {
   width: min(360px, calc(100vw - 32px));
   overflow: hidden;
@@ -1391,6 +1397,8 @@ body.page-transitioning .whatsapp-widget {
   .site-nav a {
     padding: 12px 10px;
     border-bottom: 1px solid var(--line);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(31, 167, 161, 0.18);
   }
 
   .site-nav a::after {

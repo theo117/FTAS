@@ -8,6 +8,55 @@ const postsFeedPath = "posts.json";
 const siteUrl = "https://www.fintechadv.co.za";
 const transitionStorageKey = "ftasIntroPlayed";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let compactNavActivationTime = 0;
+
+const isCompactNav = () =>
+  navToggle &&
+  window.getComputedStyle(navToggle).display !== "none";
+
+const setNavOpen = (isOpen) => {
+  siteNav?.classList.toggle("is-open", isOpen);
+  navToggle?.setAttribute("aria-expanded", String(isOpen));
+  document.body.classList.toggle("nav-menu-open", isOpen);
+};
+
+const getNavLinkFromEvent = (event) => {
+  if (!(event.target instanceof Element)) {
+    return null;
+  }
+
+  const link = event.target.closest("a[href]");
+  return link instanceof HTMLAnchorElement ? link : null;
+};
+
+const activateCompactNavLink = (event) => {
+  if (!isCompactNav()) {
+    return false;
+  }
+
+  const link = getNavLinkFromEvent(event);
+  if (!link) {
+    return false;
+  }
+
+  const now = Date.now();
+  if (now - compactNavActivationTime < 650) {
+    event.preventDefault();
+    event.stopPropagation();
+    return true;
+  }
+
+  compactNavActivationTime = now;
+  event.preventDefault();
+  event.stopPropagation();
+  if (typeof event.stopImmediatePropagation === "function") {
+    event.stopImmediatePropagation();
+  }
+
+  setNavOpen(false);
+  window.location.assign(link.href);
+  return true;
+};
 
 const createSiteTransition = () => {
   const transition = document.createElement("div");
@@ -60,8 +109,7 @@ const runSiteTransition = () => {
 
     const isCompactNavLink =
       link.closest(".site-nav") &&
-      navToggle &&
-      window.getComputedStyle(navToggle).display !== "none";
+      isCompactNav();
 
     if (isCompactNavLink) {
       return;
@@ -242,33 +290,24 @@ const renderPostPage = async () => {
 };
 
 navToggle?.addEventListener("click", () => {
-  const isOpen = siteNav.classList.toggle("is-open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
+  setNavOpen(!siteNav?.classList.contains("is-open"));
 });
 
 siteNav?.addEventListener("click", (event) => {
-  if (!(event.target instanceof Element)) {
+  if (activateCompactNavLink(event)) {
     return;
   }
 
-  const link = event.target.closest("a[href]");
-  if (!(link instanceof HTMLAnchorElement)) {
+  const link = getNavLinkFromEvent(event);
+  if (!link) {
     return;
   }
 
-  siteNav.classList.remove("is-open");
-  navToggle?.setAttribute("aria-expanded", "false");
-
-  const isCompactNav =
-    navToggle &&
-    window.getComputedStyle(navToggle).display !== "none";
-
-  if (isCompactNav) {
-    event.preventDefault();
-    event.stopPropagation();
-    window.location.assign(link.href);
-  }
+  setNavOpen(false);
 });
+
+siteNav?.addEventListener("touchend", activateCompactNavLink, { capture: true });
+siteNav?.addEventListener("pointerup", activateCompactNavLink, { capture: true });
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
