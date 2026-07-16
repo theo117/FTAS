@@ -601,6 +601,10 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.service-grid-six {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .academy-grid article {
   padding: 28px 30px;
   border-left: 4px solid var(--teal);
@@ -1628,6 +1632,7 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .service-grid,
+  .service-grid-six,
   .principle-grid,
   .academy-grid,
   .engagement-grid,
@@ -1787,6 +1792,7 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .service-grid,
+  .service-grid-six,
   .principle-grid,
   .academy-grid,
   .engagement-grid,
