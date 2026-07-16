@@ -533,7 +533,9 @@ p {
 }
 
 .service-grid,
-.principle-grid {
+.principle-grid,
+.academy-grid,
+.engagement-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
@@ -541,6 +543,8 @@ p {
 
 .service-grid article,
 .principle-grid article,
+.academy-grid article,
+.engagement-grid article,
 .post-list article {
   min-height: 100%;
   padding: 34px 30px;
@@ -553,6 +557,8 @@ p {
 
 .service-grid article:hover,
 .principle-grid article:hover,
+.academy-grid article:hover,
+.engagement-grid article:hover,
 .post-list article:hover {
   transform: translateY(-5px);
   box-shadow: 0 26px 64px rgba(31, 31, 31, 0.1);
@@ -561,11 +567,14 @@ p {
 
 .service-grid article:hover,
 .principle-grid article:hover,
+.academy-grid article:hover,
+.engagement-grid article:hover,
 .post-list article:hover {
   background: var(--surface);
 }
 
 .service-grid span,
+.engagement-grid span,
 .timeline span,
 .service-detail span {
   display: inline-block;
@@ -580,10 +589,26 @@ p {
 
 .service-grid p,
 .principle-grid p,
+.academy-grid p,
+.engagement-grid p,
 .timeline p,
 .post-list p {
   margin-bottom: 0;
   font-size: 0.92rem;
+}
+
+.academy-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.academy-grid article {
+  padding: 28px 30px;
+  border-left: 4px solid var(--teal);
+  border-radius: 4px;
+}
+
+.engagement-grid article {
+  border-radius: 4px;
 }
 
 .image-feature {
@@ -647,7 +672,7 @@ p {
 
 .timeline {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -1604,6 +1629,8 @@ body.page-transitioning .whatsapp-widget {
 
   .service-grid,
   .principle-grid,
+  .academy-grid,
+  .engagement-grid,
   .service-detail-grid,
   .team-grid,
   .timeline,
@@ -1761,6 +1788,8 @@ body.page-transitioning .whatsapp-widget {
 
   .service-grid,
   .principle-grid,
+  .academy-grid,
+  .engagement-grid,
   .service-detail-grid,
   .team-grid,
   .timeline,
@@ -1770,6 +1799,8 @@ body.page-transitioning .whatsapp-widget {
 
   .service-grid article,
   .principle-grid article,
+  .academy-grid article,
+  .engagement-grid article,
   .post-list article,
   .timeline article {
     padding: 24px 20px;
