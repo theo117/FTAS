@@ -1210,7 +1210,11 @@ body.nav-menu-open .whatsapp-widget {
 }
 
 .whatsapp-panel {
+  display: flex;
+  flex-direction: column;
   width: min(360px, calc(100vw - 32px));
+  max-height: min(590px, calc(100vh - 170px));
+  max-height: min(590px, calc(100dvh - 170px));
   overflow: hidden;
   pointer-events: none;
   background: #eef7f4;
@@ -1232,6 +1236,7 @@ body.nav-menu-open .whatsapp-widget {
 }
 
 .whatsapp-header {
+  flex: 0 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 12px;
@@ -1289,6 +1294,8 @@ body.nav-menu-open .whatsapp-widget {
 
 .whatsapp-body {
   display: grid;
+  min-height: 0;
+  overflow-y: auto;
   gap: 10px;
   padding: 18px 16px;
   background:
@@ -1324,13 +1331,14 @@ body.nav-menu-open .whatsapp-widget {
 }
 
 .whatsapp-options {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 8px;
   padding: 4px 0;
 }
 
 .whatsapp-options button {
+  width: 100%;
   padding: 8px 10px;
   color: #075e54;
   font: inherit;
@@ -1350,6 +1358,7 @@ body.nav-menu-open .whatsapp-widget {
 }
 
 .whatsapp-start {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1887,8 +1896,8 @@ body.page-transitioning .whatsapp-widget {
 
   .whatsapp-panel {
     width: min(350px, calc(100vw - 28px));
-    max-height: min(620px, calc(100vh - 100px));
-    overflow-y: auto;
+    max-height: min(570px, calc(100vh - 150px));
+    max-height: min(570px, calc(100dvh - 150px));
   }
 
   .whatsapp-launcher {
