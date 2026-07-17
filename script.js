@@ -517,9 +517,12 @@ const createWhatsappWidget = () => {
         </div>
 
         <div class="whatsapp-options" aria-label="WhatsApp message options">
-          <button type="button" data-message="Hi FTAS, I need help with regulatory strategy and readiness.">Regulatory strategy</button>
-          <button type="button" data-message="Hi FTAS, I would like to discuss fintech or bank-partner integration advisory.">Integration advisory</button>
-          <button type="button" data-message="Hi FTAS, I need help with risk, controls or partner lifecycle governance.">Risk & controls</button>
+          <button type="button" data-message="Hi FTAS, I would like to discuss Sponsor Bank Readiness support.">Sponsor Bank Readiness</button>
+          <button type="button" data-message="Hi FTAS, I would like to discuss Partner Onboarding &amp; Enablement support.">Partner Onboarding &amp; Enablement</button>
+          <button type="button" data-message="Hi FTAS, I would like to discuss Banking &amp; Payments Advisory.">Banking &amp; Payments Advisory</button>
+          <button type="button" data-message="Hi FTAS, I would like to discuss Technology &amp; Ecosystem Solutions.">Technology &amp; Ecosystem Solutions</button>
+          <button type="button" data-message="Hi FTAS, I would like to discuss Commercial &amp; Partnership Advisory.">Commercial &amp; Partnership Advisory</button>
+          <button type="button" data-message="Hi FTAS, I would like to discuss Governance &amp; Regulatory Readiness.">Governance &amp; Regulatory Readiness</button>
         </div>
 
         <div class="chat-bubble user" data-selected-message>
