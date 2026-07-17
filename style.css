@@ -436,6 +436,11 @@ p {
   background: var(--teal);
 }
 
+.hero-home .rule {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
