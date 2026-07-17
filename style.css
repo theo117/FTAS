@@ -301,7 +301,7 @@ p {
 .hero-slide.is-active {
   opacity: 0.34;
   transform: scale(1.1) translateX(-1.6%);
-  animation: hero-image-pan 18s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
+  animation: hero-image-pan 12s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
 }
 
 .hero-slide.is-exiting {
@@ -314,16 +314,16 @@ p {
     transform: scale(1.1) translateX(-1.6%) translateY(0) rotate(0deg);
   }
   25% {
-    transform: scale(1.135) translateX(-0.6%) translateY(-10px) rotate(-0.4deg);
+    transform: scale(1.14) translateX(-0.4%) translateY(-12px) rotate(-0.45deg);
   }
   50% {
-    transform: scale(1.16) translateX(0.4%) translateY(-18px) rotate(0.2deg);
+    transform: scale(1.17) translateX(0.8%) translateY(-22px) rotate(0.25deg);
   }
   75% {
-    transform: scale(1.13) translateX(-1.4%) translateY(-8px) rotate(-0.2deg);
+    transform: scale(1.14) translateX(-1.8%) translateY(-10px) rotate(-0.25deg);
   }
   100% {
-    transform: scale(1.1) translateX(-2.2%) translateY(10px) rotate(0deg);
+    transform: scale(1.11) translateX(-2.8%) translateY(14px) rotate(0deg);
   }
 }
 
