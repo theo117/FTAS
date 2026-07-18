@@ -1023,6 +1023,47 @@ p {
   font-weight: 800;
 }
 
+.vcard-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 22px;
+  align-items: center;
+}
+
+.vcard-card .vcard-copy {
+  min-width: 0;
+}
+
+.vcard-card .vcard-download {
+  display: inline-block;
+  margin-top: 14px;
+}
+
+.vcard-qr {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.contact-page .whatsapp-widget {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .vcard-card {
+    grid-template-columns: 1fr;
+  }
+
+  .vcard-qr {
+    width: min(220px, 100%);
+    margin: 4px auto 0;
+  }
+}
+
 .legal-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
