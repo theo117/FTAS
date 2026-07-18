@@ -1256,7 +1256,7 @@ textarea:focus {
   position: fixed;
   right: clamp(16px, 3vw, 30px);
   bottom: clamp(16px, 3vw, 30px);
-  z-index: 40;
+  z-index: 100;
   display: grid;
   justify-items: end;
   gap: 14px;
@@ -1273,9 +1273,9 @@ body.nav-menu-open .whatsapp-widget {
 .whatsapp-panel {
   display: flex;
   flex-direction: column;
-  width: min(360px, calc(100vw - 32px));
-  max-height: min(590px, calc(100vh - 170px));
-  max-height: min(590px, calc(100dvh - 170px));
+  width: min(390px, calc(100vw - 32px));
+  max-height: min(680px, calc(100vh - 118px));
+  max-height: min(680px, calc(100dvh - 118px));
   overflow: hidden;
   pointer-events: none;
   background: #eef7f4;
@@ -1969,8 +1969,8 @@ body.page-transitioning .whatsapp-widget {
 
   .whatsapp-panel {
     width: min(350px, calc(100vw - 28px));
-    max-height: min(570px, calc(100vh - 150px));
-    max-height: min(570px, calc(100dvh - 150px));
+    max-height: min(650px, calc(100vh - 96px));
+    max-height: min(650px, calc(100dvh - 96px));
   }
 
   .whatsapp-launcher {
