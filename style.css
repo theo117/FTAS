@@ -1049,10 +1049,6 @@ p {
   border-radius: 4px;
 }
 
-.contact-page .whatsapp-widget {
-  display: none;
-}
-
 @media (max-width: 520px) {
   .vcard-card {
     grid-template-columns: 1fr;

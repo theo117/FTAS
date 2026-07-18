@@ -678,9 +678,7 @@ const createWhatsappWidget = () => {
   }
 };
 
-if (!document.body.classList.contains("contact-page")) {
-  createWhatsappWidget();
-}
+createWhatsappWidget();
 enableContactForm();
 addSliderToPageHero();
 createHeroSlider();
