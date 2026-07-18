@@ -134,7 +134,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--ink);
+  color: var(--teal-dark);
   font-size: 1.02rem;
   font-weight: 800;
 }
