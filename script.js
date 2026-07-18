@@ -491,6 +491,71 @@ if ("IntersectionObserver" in window) {
 const buildWhatsappUrl = (message) =>
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
+const enableContactForm = () => {
+  const form = document.querySelector("#contact-form");
+  if (!(form instanceof HTMLFormElement)) {
+    return;
+  }
+
+  const status = form.querySelector(".form-status");
+  const submitButton = form.querySelector("[data-submit-button]");
+  const defaultButtonLabel = submitButton?.textContent || "Send Enquiry";
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) {
+      return;
+    }
+
+    const formData = new FormData(form);
+    const name = String(formData.get("name") || "").trim();
+    const endpoint = form.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+
+    form.setAttribute("aria-busy", "true");
+    status?.classList.remove("is-success", "is-error");
+    if (status) {
+      status.textContent = "Sending your enquiry securely…";
+    }
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending…";
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success === false || result.success === "false") {
+        throw new Error("Form submission failed");
+      }
+
+      form.reset();
+      status?.classList.add("is-success");
+      if (status) {
+        status.textContent = `Thank you${name ? `, ${name}` : ""}. Your enquiry has been sent successfully. Our advisory team will be in touch shortly.`;
+      }
+    } catch {
+      status?.classList.add("is-error");
+      if (status) {
+        status.textContent = "We couldn’t send your enquiry just now. Please try again, or email Info@fintechadv.co.za directly.";
+      }
+    } finally {
+      form.removeAttribute("aria-busy");
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonLabel;
+      }
+    }
+  });
+};
+
 const createWhatsappWidget = () => {
   const widget = document.createElement("aside");
   widget.className = "whatsapp-widget";
@@ -583,6 +648,7 @@ const createWhatsappWidget = () => {
 };
 
 createWhatsappWidget();
+enableContactForm();
 createHeroSlider();
 runSiteTransition();
 renderInsightsPage();

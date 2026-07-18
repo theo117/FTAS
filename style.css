@@ -641,30 +641,25 @@ p {
 }
 
 .feature-image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  height: auto;
   animation: feature-image-float 16s ease-in-out infinite alternate;
 }
 
 @keyframes feature-image-float {
-  0% {
-    transform: scale(1) translateY(0) rotate(0deg);
-  }
-  20% {
-    transform: scale(1.02) translateY(-6px) rotate(-0.2deg);
-  }
-  40% {
-    transform: scale(1.04) translateY(-12px) rotate(0.2deg);
-  }
-  60% {
-    transform: scale(1.03) translateY(-8px) rotate(-0.1deg);
-  }
-  80% {
-    transform: scale(1.02) translateY(-4px) rotate(0.1deg);
-  }
+  0%,
   100% {
     transform: scale(1) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.055) translate(-8px, -6px) rotate(-0.25deg);
+  }
+  50% {
+    transform: scale(1.11) translate(6px, -12px) rotate(0.2deg);
+  }
+  75% {
+    transform: scale(1.075) translate(-5px, -8px) rotate(-0.15deg);
   }
 }
 
@@ -1138,6 +1133,29 @@ textarea:focus {
   font-weight: 800;
 }
 
+.form-status.is-success,
+.form-status.is-error {
+  padding: 14px 16px;
+  border-radius: 4px;
+}
+
+.form-status.is-success {
+  color: #0b625d;
+  background: rgba(31, 167, 161, 0.12);
+  border: 1px solid rgba(31, 167, 161, 0.3);
+}
+
+.form-status.is-error {
+  color: #8b2f2f;
+  background: rgba(180, 58, 58, 0.08);
+  border: 1px solid rgba(180, 58, 58, 0.24);
+}
+
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
 .site-footer {
   padding: 54px 0 28px;
   color: rgba(255, 255, 255, 0.72);
@@ -1151,7 +1169,10 @@ textarea:focus {
 }
 
 .footer-brand img {
+  display: block;
   width: 70px;
+  height: auto;
+  object-fit: contain;
   margin-bottom: 18px;
 }
 
@@ -1589,6 +1610,10 @@ body.page-transitioning .whatsapp-widget {
 
   .whatsapp-pulse {
     display: none;
+  }
+
+  .feature-image img {
+    animation: none;
   }
 
   .whatsapp-panel {
