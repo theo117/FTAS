@@ -272,7 +272,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-media {
@@ -387,9 +387,10 @@ p {
 .hero-inner {
   position: relative;
   z-index: 1;
-  width: min(100%, 860px);
+  width: 100%;
+  max-width: var(--max);
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
   padding-top: clamp(86px, 12vw, 140px);
   padding-bottom: clamp(64px, 9vw, 104px);
 }
@@ -406,7 +407,7 @@ p {
 
 .hero-copy {
   max-width: 680px;
-  margin: 0 auto;
+  margin: 0;
   color: rgba(255, 255, 255, 0.86) !important;
   font-size: clamp(1.05rem, 1.4vw, 1.2rem);
 }
@@ -437,14 +438,14 @@ p {
 }
 
 .hero-home .rule {
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 14px;
   margin-top: 44px;
 }
