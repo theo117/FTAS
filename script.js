@@ -393,6 +393,37 @@ const renderPostPage = async () => {
   }
 };
 
+const addSliderToPageHero = () => {
+  const pageHero = document.querySelector(".page-hero");
+  if (!pageHero || pageHero.querySelector("[data-hero-slider]")) {
+    return;
+  }
+
+  const media = document.createElement("div");
+  media.className = "hero-media hero-slider";
+  media.setAttribute("data-hero-slider", "");
+  media.setAttribute("aria-hidden", "true");
+  media.innerHTML = `
+    <img class="hero-slide is-active" src="assets/fintech-advisory-visual.webp" alt="" width="1774" height="887" />
+    <img class="hero-slide" src="assets/advisory-meeting.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+  `;
+
+  const controls = document.createElement("div");
+  controls.className = "hero-slider-controls";
+  controls.setAttribute("aria-label", "Hero image controls");
+  controls.innerHTML = `
+    <button type="button" data-hero-prev aria-label="Previous hero image">‹</button>
+    <div class="hero-slider-dots" aria-hidden="true">
+      <span class="is-active"></span>
+      <span></span>
+    </div>
+    <button type="button" data-hero-next aria-label="Next hero image">›</button>
+  `;
+
+  pageHero.prepend(media);
+  pageHero.append(controls);
+};
+
 const createHeroSlider = () => {
   const slider = document.querySelector("[data-hero-slider]");
   const slides = [...document.querySelectorAll(".hero-slide")];
@@ -649,6 +680,7 @@ const createWhatsappWidget = () => {
 
 createWhatsappWidget();
 enableContactForm();
+addSliderToPageHero();
 createHeroSlider();
 runSiteTransition();
 renderInsightsPage();
