@@ -29,6 +29,7 @@
     <meta name="twitter:image" content="https://www.fintechadv.co.za/assets/fintech-advisory-visual.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png" />
     <link rel="apple-touch-icon" href="assets/favicon.png" />
+    <link rel="preload" as="image" href="assets/fintech-advisory-visual.webp" type="image/webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -87,7 +88,7 @@
   <body>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="FTAS home">
-        <img src="assets/fsa-logo.png" alt="Financial Technology Advisory Services logo" />
+        <img src="assets/fsa-logo.webp" alt="Financial Technology Advisory Services logo" width="346" height="378" />
         <span>FTAS</span>
       </a>
 
@@ -109,8 +110,8 @@
     <main>
       <section class="hero hero-home">
         <div class="hero-media hero-slider" data-hero-slider aria-hidden="true">
-          <img class="hero-slide is-active" src="assets/fintech-advisory-visual.png" alt="" />
-          <img class="hero-slide" src="assets/advisory-meeting.png" alt="" />
+          <img class="hero-slide is-active" src="assets/fintech-advisory-visual.webp" alt="" width="1774" height="887" fetchpriority="high" />
+          <img class="hero-slide" src="assets/advisory-meeting.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
         </div>
         <div class="wrap hero-inner reveal">
           <span class="rule"></span>
@@ -252,7 +253,11 @@
         <div class="wrap image-feature-grid">
           <figure class="feature-image reveal">
             <img
-              src="assets/advisory-meeting.png"
+              src="assets/advisory-meeting.webp"
+              width="1536"
+              height="1024"
+              loading="lazy"
+              decoding="async"
               alt="Financial technology advisory team reviewing strategy and risk controls"
             />
           </figure>
@@ -324,7 +329,7 @@
     <footer class="site-footer">
       <div class="wrap footer-grid">
         <div class="footer-brand">
-          <img src="assets/fsa-logo.png" alt="" />
+          <img src="assets/fsa-logo.webp" alt="" width="346" height="378" loading="lazy" decoding="async" />
           <p>
             FTAS helps banks, fintechs, payment providers and enterprise businesses build successful
             banking partnerships from concept to market.
@@ -363,6 +368,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

@@ -119,7 +119,7 @@ const createSiteTransition = () => {
   transition.setAttribute("aria-hidden", "true");
   transition.innerHTML = `
     <div class="site-transition__mark">
-      <img src="assets/fsa-logo.png" alt="" />
+      <img src="assets/fsa-logo.webp" alt="" width="346" height="378" />
     </div>
     <span class="site-transition__line"></span>
   `;
@@ -499,7 +499,7 @@ const createWhatsappWidget = () => {
     <div class="whatsapp-panel" id="whatsapp-panel" aria-hidden="true">
       <div class="whatsapp-header">
         <div class="whatsapp-avatar" aria-hidden="true">
-          <img src="assets/fsa-logo.png" alt="" />
+          <img src="assets/fsa-logo.webp" alt="" width="346" height="378" />
         </div>
         <div>
           <strong>FTAS Advisory</strong>
