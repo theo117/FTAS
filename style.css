@@ -1,7 +1,7 @@
 :root {
   --ink: #1f1f1f;
   --heading: #5a5f63;
-  --muted: #8a8f94;
+  --muted: #697177;
   --line: #dfe3e5;
   --line-strong: #c7c9cc;
   --surface: #f5f7f8;
@@ -13,7 +13,7 @@
   --shadow: 0 24px 60px rgba(31, 31, 31, 0.1);
   --max: 1180px;
   --gutter: clamp(20px, 5vw, 72px);
-  --header-height: 210px;
+  --header-height: 112px;
 }
 
 * {
@@ -143,8 +143,8 @@ p {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
-  width: 180px;
-  height: 180px;
+  width: 88px;
+  height: 88px;
   aspect-ratio: 1;
   background: #1f1f1f;
   border: 2px solid rgba(31, 167, 161, 0.45);
@@ -278,7 +278,7 @@ p {
 .hero {
 
   position: relative;
-  min-height: min(760px, calc(100vh - var(--header-height)));
+  min-height: min(720px, calc(100vh - var(--header-height)));
   overflow: hidden;
   background: var(--charcoal);
 }
@@ -316,7 +316,7 @@ p {
 .hero-slide.is-active {
   opacity: 0.34;
   transform: scale(1.1) translateX(-1.6%);
-  animation: hero-image-pan 12s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
+  animation: hero-image-pan 18s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
 }
 
 .hero-slide.is-exiting {
@@ -353,7 +353,7 @@ p {
 
 .hero-slider-controls {
   position: absolute;
-  right: calc(var(--gutter) + 160px);
+  right: calc(var(--gutter) + 112px);
   bottom: clamp(24px, 4vw, 44px);
   z-index: 2;
   display: flex;
@@ -406,8 +406,8 @@ p {
   max-width: var(--max);
   margin: 0 auto;
   text-align: left;
-  padding-top: clamp(86px, 12vw, 140px);
-  padding-bottom: clamp(64px, 9vw, 104px);
+  padding-top: clamp(70px, 8vw, 104px);
+  padding-bottom: clamp(58px, 7vw, 86px);
 }
 
 .hero h1,
@@ -416,8 +416,9 @@ p {
 }
 
 .hero h1 {
-  font-size: clamp(3rem, 6vw, 6rem);
-  line-height: 1.02;
+  max-width: 860px;
+  font-size: clamp(2.8rem, 5.2vw, 4.85rem);
+  line-height: 1.04;
 }
 
 .hero-copy {
@@ -571,7 +572,7 @@ p {
   padding: 34px 30px;
   background: var(--paper);
   border: 1px solid rgba(31, 31, 31, 0.06);
-  border-radius: 20px;
+  border-radius: 12px;
   box-shadow: 0 18px 48px rgba(31, 31, 31, 0.07);
   transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
 }
@@ -651,7 +652,7 @@ p {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 24px;
+  border-radius: 12px;
   box-shadow: 0 30px 80px rgba(31, 31, 31, 0.18);
 }
 
@@ -659,7 +660,7 @@ p {
   display: block;
   width: 100%;
   height: auto;
-  animation: feature-image-float 16s ease-in-out infinite alternate;
+  animation: feature-image-float 22s ease-in-out infinite alternate;
 }
 
 @keyframes feature-image-float {
@@ -668,13 +669,13 @@ p {
     transform: scale(1) translateY(0) rotate(0deg);
   }
   25% {
-    transform: scale(1.055) translate(-8px, -6px) rotate(-0.25deg);
+    transform: scale(1.025) translate(-4px, -3px) rotate(-0.1deg);
   }
   50% {
-    transform: scale(1.11) translate(6px, -12px) rotate(0.2deg);
+    transform: scale(1.05) translate(3px, -6px) rotate(0.1deg);
   }
   75% {
-    transform: scale(1.075) translate(-5px, -8px) rotate(-0.15deg);
+    transform: scale(1.035) translate(-3px, -4px) rotate(-0.08deg);
   }
 }
 
@@ -1662,10 +1663,10 @@ body.page-transitioning .whatsapp-widget {
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(14px);
   transition:
-    opacity 700ms ease,
-    transform 700ms ease;
+    opacity 420ms ease,
+    transform 420ms ease;
 }
 
 .reveal.is-visible {
@@ -1766,7 +1767,7 @@ body.page-transitioning .whatsapp-widget {
 
 @media (max-width: 860px) {
   :root {
-    --header-height: 168px;
+    --header-height: 92px;
   }
 
   body {
@@ -1780,8 +1781,8 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .brand .logo-badge {
-    width: 140px;
-    height: 140px;
+    width: 68px;
+    height: 68px;
   }
 
   .nav-toggle {
@@ -1857,8 +1858,8 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .hero-inner {
-    padding-top: clamp(88px, 18vw, 112px);
-    padding-bottom: clamp(88px, 20vw, 112px);
+    padding-top: clamp(54px, 12vw, 76px);
+    padding-bottom: clamp(72px, 16vw, 96px);
   }
 
   .hero-slider-controls {
@@ -1891,7 +1892,12 @@ body.page-transitioning .whatsapp-widget {
   }
 
   h1 {
-    font-size: clamp(2.18rem, 11vw, 2.9rem);
+    font-size: clamp(2.08rem, 10vw, 2.75rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.15rem, 10.5vw, 2.85rem);
+    line-height: 1.06;
   }
 
   h2 {
@@ -2022,8 +2028,8 @@ body.page-transitioning .whatsapp-widget {
   }
 
   .brand .logo-badge {
-    width: 124px;
-    height: 124px;
+    width: 64px;
+    height: 64px;
   }
 
   .nav-toggle {
@@ -2032,7 +2038,11 @@ body.page-transitioning .whatsapp-widget {
   }
 
   h1 {
-    font-size: clamp(2rem, 10.5vw, 2.45rem);
+    font-size: clamp(1.95rem, 9.8vw, 2.35rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 10vw, 2.42rem);
   }
 
   .button {
