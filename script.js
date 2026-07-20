@@ -337,7 +337,7 @@ const renderPostPage = async () => {
     const postUrl = `${siteUrl}/post?slug=${post.slug}`;
     const postTitle = `${post.title} | FTAS`;
 
-    document.title = postTitle;
+    document.title = "Financial Technology Advisory Services";
     title.textContent = post.title;
     meta.textContent = `${post.type} / ${post.category} / ${formatPostDate(post.date)}`;
     excerpt.textContent = post.excerpt;
