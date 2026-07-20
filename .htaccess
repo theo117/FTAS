@@ -1,0 +1,46 @@
+# Financial Technology Advisory Services — Apache/Afrihost configuration
+
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Keep the public URL aligned with canonical metadata and the sitemap.
+  # Enable only once Afrihost has installed a trusted SSL certificate for
+  # fintechadv.co.za and www.fintechadv.co.za.
+    RewriteCond %{HTTPS} !=on [OR]
+    RewriteCond %{HTTP_HOST} !^www\.fintechadv\.co\.za$ [NC]
+    RewriteRule ^ https://www.fintechadv.co.za%{REQUEST_URI} [R=301,L]
+
+  # Serve extensionless public URLs such as /about from about.html.
+  # Existing .html links remain valid for compatibility.
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  <FilesMatch "\.(?:css|js|json)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "\.(?:png|webp|jpg|jpeg|gif|svg|ico|vcf)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType text/vcard .vcf
+</IfModule>
+
+Options -Indexes
