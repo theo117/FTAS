@@ -26,9 +26,15 @@
   </url>
   <url>
     <loc>https://www.fintechadv.co.za/contact</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fintechadv.co.za/complaints</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.fintechadv.co.za/terms</loc>

@@ -18,6 +18,13 @@ const isCompactNav = () =>
   navToggle &&
   window.getComputedStyle(navToggle).display !== "none";
 
+if (siteNav && !siteNav.querySelector('a[href="complaints.html"]')) {
+  const complaintsLink = document.createElement("a");
+  complaintsLink.href = "complaints.html";
+  complaintsLink.textContent = "Complaints";
+  siteNav.insertBefore(complaintsLink, siteNav.querySelector(".nav-cta"));
+}
+
 const setNavOpen = (isOpen) => {
   siteNav?.classList.toggle("is-open", isOpen);
   navToggle?.setAttribute("aria-expanded", String(isOpen));
@@ -588,6 +595,97 @@ const enableContactForm = () => {
   });
 };
 
+const enableComplaintsForm = () => {
+  const form = document.querySelector("#complaints-form");
+  if (!(form instanceof HTMLFormElement)) {
+    return;
+  }
+
+  const status = form.querySelector("[data-complaint-status]");
+  const submitButton = form.querySelector("[data-complaint-submit]");
+  const confirmation = document.querySelector("[data-complaint-confirmation]");
+  const maxFileSize = 10 * 1024 * 1024;
+
+  const toggleConditionalFields = () => {
+    const previouslyReported = form.querySelector('[name="Previously reported"]:checked')?.value === "Yes";
+    const previousDetails = form.querySelector("[data-previous-report-details]");
+    const previousDate = form.querySelector("[data-previous-report-date]");
+    previousDetails?.toggleAttribute("hidden", !previouslyReported);
+    if (previousDate instanceof HTMLInputElement) {
+      previousDate.required = previouslyReported;
+      if (!previouslyReported) previousDate.value = "";
+    }
+
+    const documentsAttached = form.querySelector('[name="Supporting documents attached"]:checked')?.value === "Yes";
+    form.querySelector("[data-document-list]")?.toggleAttribute("hidden", !documentsAttached);
+  };
+
+  form.querySelectorAll("[data-previously-reported], [data-documents-attached]").forEach((input) => {
+    input.addEventListener("change", toggleConditionalFields);
+  });
+
+  form.querySelectorAll("[data-complaint-file]").forEach((input) => {
+    input.addEventListener("change", () => {
+      const file = input.files?.[0];
+      input.setCustomValidity(file && file.size > maxFileSize ? "This file exceeds the 10 MB limit." : "");
+      input.reportValidity();
+    });
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const now = new Date();
+    const date = now.toISOString().slice(0, 10).replaceAll("-", "");
+    const randomPart = crypto.getRandomValues(new Uint32Array(1))[0].toString(36).slice(0, 6).toUpperCase().padStart(6, "0");
+    const reference = `FTAS-${date}-${randomPart}`;
+    const firstName = String(new FormData(form).get("First name") || "").trim();
+    const referenceInput = form.querySelector("[data-complaint-reference]");
+    const subjectInput = form.querySelector("[data-complaint-subject]");
+    const autoresponseInput = form.querySelector("[data-complaint-autoresponse]");
+
+    referenceInput.value = reference;
+    subjectInput.value = `New FTAS complaint — ${reference}`;
+    autoresponseInput.value = `Thank you${firstName ? `, ${firstName}` : ""}, for submitting your complaint to FTAS. Your reference number is ${reference}. We will review your complaint and get back to you as soon as possible.`;
+
+    form.setAttribute("aria-busy", "true");
+    status?.classList.remove("is-success", "is-error");
+    if (status) status.textContent = "Submitting your complaint securely…";
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting…";
+    }
+
+    try {
+      const response = await fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === false || result.success === "false") throw new Error("Submission failed");
+
+      form.reset();
+      form.hidden = true;
+      if (confirmation instanceof HTMLElement) {
+        confirmation.querySelector("[data-confirmation-reference]").textContent = reference;
+        confirmation.hidden = false;
+        confirmation.focus();
+      }
+    } catch {
+      status?.classList.add("is-error");
+      if (status) status.textContent = "We couldn’t submit your complaint just now. Please try again, or email Info@fintechadv.co.za directly.";
+    } finally {
+      form.removeAttribute("aria-busy");
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Complaint";
+      }
+    }
+  });
+};
+
 const createWhatsappWidget = () => {
   const widget = document.createElement("aside");
   widget.className = "whatsapp-widget";
@@ -740,6 +838,7 @@ const createCookieConsent = () => {
 createCookieConsent();
 createWhatsappWidget();
 enableContactForm();
+enableComplaintsForm();
 addSliderToPageHero();
 createHeroSlider();
 runSiteTransition();

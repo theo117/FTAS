@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Submit a complaint to Financial Technology Advisory Services and receive a unique complaint reference number." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#138D87" />
+    <title>Submit a Complaint | FTAS</title>
+    <link rel="canonical" href="https://www.fintechadv.co.za/complaints" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="FTAS home">
+        <span class="logo-badge"><img src="assets/fsa-logo.webp" alt="Financial Technology Advisory Services logo" width="346" height="378" /></span>
+        <span>FTAS</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="complaints.html" class="active">Complaints</a><a class="nav-cta" href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="wrap page-hero-inner reveal">
+          <span class="rule"></span>
+          <p class="eyebrow">Complaints process</p>
+          <h1>Submit a complaint.</h1>
+          <p>Provide the details below and attach any supporting documents. You will receive a unique reference number after successful submission.</p>
+        </div>
+      </section>
+
+      <section class="section complaints-section">
+        <div class="wrap complaints-wrap reveal">
+          <div class="complaints-intro">
+            <p class="eyebrow">Complaint details</p>
+            <h2>Tell us what happened.</h2>
+            <p>Fields marked with an asterisk are required. Supporting files may be PDF, Word, image or text files and must not exceed 10 MB each.</p>
+          </div>
+
+          <form class="complaints-form" id="complaints-form" action="https://formsubmit.co/Info@fintechadv.co.za" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_subject" value="New FTAS complaint" data-complaint-subject />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_autoresponse" value="Thank you for submitting your complaint to FTAS. We will review it and get back to you as soon as possible." data-complaint-autoresponse />
+            <input type="hidden" name="Complaint reference" value="" data-complaint-reference />
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
+
+            <fieldset class="complaint-group">
+              <legend>Your details</legend>
+              <div class="complaint-grid">
+                <label>First name *<input type="text" name="First name" autocomplete="given-name" required /></label>
+                <label>Last name *<input type="text" name="Last name" autocomplete="family-name" required /></label>
+                <label>Email *<input type="email" name="email" autocomplete="email" required /></label>
+                <label>Company name<input type="text" name="Company name" autocomplete="organization" /></label>
+                <label>Phone number<input type="tel" name="Phone number" autocomplete="tel" placeholder="e.g. 071 123 4567" /></label>
+                <label>Account number<input type="text" name="Account number" autocomplete="off" /></label>
+              </div>
+              <fieldset class="choice-fieldset">
+                <legend>Preferred contact method *</legend>
+                <div class="choice-row">
+                  <label><input type="radio" name="Preferred contact method" value="Phone" required /> Phone</label>
+                  <label><input type="radio" name="Preferred contact method" value="Email" /> Email</label>
+                  <label><input type="radio" name="Preferred contact method" value="SMS" /> SMS</label>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="complaint-group">
+              <legend>About the complaint</legend>
+              <label>Date of incident *<input type="date" name="Date of incident" required /></label>
+              <fieldset class="choice-fieldset">
+                <legend>Nature of complaint *</legend>
+                <div class="choice-grid">
+                  <label><input type="radio" name="Nature of complaint" value="Product functionality" required /> Product functionality</label>
+                  <label><input type="radio" name="Nature of complaint" value="Service quality" /> Service quality</label>
+                  <label><input type="radio" name="Nature of complaint" value="Staff conduct" /> Staff conduct</label>
+                  <label><input type="radio" name="Nature of complaint" value="Fees or charges" /> Fees or charges</label>
+                  <label><input type="radio" name="Nature of complaint" value="System issues" /> System issues</label>
+                  <label><input type="radio" name="Nature of complaint" value="Other" /> Other</label>
+                </div>
+              </fieldset>
+              <label>Detailed description of complaint *<textarea name="Detailed description" rows="7" required></textarea></label>
+            </fieldset>
+
+            <fieldset class="complaint-group">
+              <legend>Supporting information</legend>
+              <div class="complaint-grid">
+                <label class="file-field">Attach supporting document<span>Choose a file up to 10 MB</span><input type="file" name="Supporting document" data-complaint-file accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt" /></label>
+                <label class="file-field">Attach additional supporting document<span>Choose a file up to 10 MB</span><input type="file" name="Additional supporting document" data-complaint-file accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt" /></label>
+              </div>
+              <fieldset class="choice-fieldset">
+                <legend>Have you previously reported this issue? *</legend>
+                <div class="choice-row">
+                  <label><input type="radio" name="Previously reported" value="Yes" required data-previously-reported /> Yes</label>
+                  <label><input type="radio" name="Previously reported" value="No" data-previously-reported /> No</label>
+                </div>
+              </fieldset>
+              <div class="conditional-field" data-previous-report-details hidden>
+                <label>If yes, when?<input type="date" name="Previous report date" data-previous-report-date /></label>
+              </div>
+              <fieldset class="choice-fieldset">
+                <legend>Supporting documents attached?</legend>
+                <div class="choice-row">
+                  <label><input type="radio" name="Supporting documents attached" value="Yes" data-documents-attached /> Yes</label>
+                  <label><input type="radio" name="Supporting documents attached" value="No" data-documents-attached /> No</label>
+                </div>
+              </fieldset>
+              <div class="conditional-field" data-document-list hidden>
+                <label>If yes, please list the supporting documents<textarea name="Supporting document list" rows="3"></textarea></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="complaint-group">
+              <legend>Resolution and declaration</legend>
+              <label>Desired outcome<textarea name="Desired outcome" rows="5"></textarea></label>
+              <label class="declaration"><input type="checkbox" name="Declaration accepted" value="Yes" required /> <span>I confirm that the information provided above is true and accurate to the best of my knowledge. *</span></label>
+            </fieldset>
+
+            <button class="button button-primary complaint-submit" type="submit" data-complaint-submit>Submit Complaint</button>
+            <p class="form-status" role="status" aria-live="polite" data-complaint-status></p>
+          </form>
+
+          <section class="complaint-confirmation" data-complaint-confirmation tabindex="-1" hidden>
+            <p class="eyebrow">Complaint submitted</p>
+            <h2>Thank you for submitting your complaint.</h2>
+            <p>We will review it and get back to you as soon as possible. Your reference number is:</p>
+            <strong data-confirmation-reference></strong>
+            <p>A confirmation has been sent to your email address. Please keep this reference for future correspondence.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div class="footer-brand"><span class="logo-badge"><img src="assets/fsa-logo.webp" alt="" width="346" height="378" /></span><p>Financial Technology Advisory Services helps financial innovators build successful banking partnerships.</p></div>
+        <div><h4>Navigation</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="contact.html">Contact</a><a href="complaints.html">Complaints</a><a href="terms.html">Terms</a><a href="paia.html">PAIA Manual</a></div>
+        <div><h4>Services</h4><a href="services.html#readiness">Sponsor Bank Readiness</a><a href="services.html#onboarding">Partner Onboarding</a><a href="services.html#banking">Banking &amp; Payments Advisory</a><a href="services.html#technology">Technology Solutions</a></div>
+        <div><h4>Contact</h4><a href="mailto:Info@fintechadv.co.za">Info@fintechadv.co.za</a><a href="tel:+27837903307">+27 83 790 3307</a><a href="tel:+27718630218">+27 71 863 0218</a><p>29 6th Street, Houghton Estate, Gauteng, 2198</p></div>
+      </div>
+      <div class="wrap footer-bottom"><span>Financial Technology Advisory Services (Pty) Ltd. Website terms effective June 2026.</span><a href="https://www.teodordev.co.za" target="_blank" rel="noopener">Website by Teodor Dev Tech</a></div>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
+</html>
