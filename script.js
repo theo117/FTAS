@@ -7,6 +7,7 @@ const defaultWhatsappMessage =
 const postsFeedPath = "posts.json";
 const siteUrl = "https://www.fintechadv.co.za";
 const skipIntroStorageKey = "ftasSkipIntro";
+const cookieConsentStorageKey = "ftasCookieConsent";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let compactNavActivationTime = 0;
 let transitionElement;
@@ -678,6 +679,65 @@ const createWhatsappWidget = () => {
   }
 };
 
+const createCookieConsent = () => {
+  let savedConsent;
+
+  try {
+    savedConsent = localStorage.getItem(cookieConsentStorageKey);
+  } catch {
+    savedConsent = null;
+  }
+
+  if (savedConsent === "all" || savedConsent === "essential") {
+    document.documentElement.dataset.cookieConsent = savedConsent;
+    return;
+  }
+
+  const banner = document.createElement("section");
+  banner.className = "cookie-consent";
+  banner.setAttribute("aria-label", "Cookie consent");
+  banner.setAttribute("role", "dialog");
+  banner.setAttribute("aria-live", "polite");
+  banner.innerHTML = `
+    <div class="cookie-consent__copy">
+      <strong>Your privacy matters</strong>
+      <p>
+        We use essential cookies to keep this website working. With your permission,
+        we may also use optional cookies to understand site usage and improve your experience.
+        <a href="terms.html#privacy-cookies">Learn more</a>
+      </p>
+    </div>
+    <div class="cookie-consent__actions">
+      <button class="cookie-consent__button cookie-consent__button--secondary" type="button" data-cookie-choice="essential">
+        Essential only
+      </button>
+      <button class="cookie-consent__button cookie-consent__button--primary" type="button" data-cookie-choice="all">
+        Accept all
+      </button>
+    </div>
+  `;
+
+  const saveChoice = (choice) => {
+    try {
+      localStorage.setItem(cookieConsentStorageKey, choice);
+    } catch {
+      // The choice still applies for this page view when storage is unavailable.
+    }
+
+    document.documentElement.dataset.cookieConsent = choice;
+    banner.classList.add("is-hiding");
+    window.setTimeout(() => banner.remove(), prefersReducedMotion ? 0 : 220);
+  };
+
+  banner.querySelectorAll("[data-cookie-choice]").forEach((button) => {
+    button.addEventListener("click", () => saveChoice(button.dataset.cookieChoice));
+  });
+
+  document.body.append(banner);
+  requestAnimationFrame(() => banner.classList.add("is-visible"));
+};
+
+createCookieConsent();
 createWhatsappWidget();
 enableContactForm();
 addSliderToPageHero();
